@@ -1,8 +1,17 @@
-import { Facebook, Github, Linkedin, Mail, MessageCircle, Youtube } from 'lucide-react';
+import {
+  Facebook,
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+  MessageCircle,
+  Music2,
+  Youtube,
+} from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import type { SocialPlatform } from '@/types';
 
-/** WhatsApp has no brand icon in Lucide; a message bubble reads clearly enough. */
+/** WhatsApp and TikTok have no brand icons in Lucide; the closest plain icons are used instead. */
 const icons: Record<SocialPlatform, LucideIcon> = {
   github: Github,
   linkedin: Linkedin,
@@ -10,6 +19,8 @@ const icons: Record<SocialPlatform, LucideIcon> = {
   facebook: Facebook,
   whatsapp: MessageCircle,
   email: Mail,
+  tiktok: Music2,
+  instagram: Instagram,
 };
 
 interface SocialIconProps {

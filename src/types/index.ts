@@ -6,7 +6,8 @@
 
 export type Theme = 'light' | 'dark';
 
-export type SocialPlatform = 'github' | 'linkedin' | 'youtube' | 'facebook' | 'whatsapp' | 'email';
+export type SocialPlatform =
+  'github' | 'linkedin' | 'youtube' | 'facebook' | 'whatsapp' | 'email' | 'tiktok' | 'instagram';
 
 export interface SocialLink {
   /** Stable id, also used to pick the icon. */

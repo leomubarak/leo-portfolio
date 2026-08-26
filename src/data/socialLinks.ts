@@ -42,14 +42,14 @@ export const socialLinks: SocialLink[] = [
     featured: true,
   },
   {
-    platform: 'tiktok' as SocialLink['platform'],
+    platform: 'tiktok',
     label: 'TikTok',
     href: 'https://www.tiktok.com/@leo_mubarak?_r=1&_t=ZS-99DK8cIoOWN',
     handle: '@leo_mubarak',
     featured: true,
   },
   {
-    platform: 'instagram' as SocialLink['platform'],
+    platform: 'instagram',
     label: 'Instagram',
     href: 'https://www.instagram.com/leo_mubarak',
     handle: '@leo_mubarak',
