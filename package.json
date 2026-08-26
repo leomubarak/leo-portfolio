@@ -1,0 +1,35 @@
+{
+  "name": "leo-portfolio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Personal portfolio of Leo \u2014 Information Technology Education student, developer and educator.",
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/generate-sitemap.mjs && tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "check": "node scripts/check-content.mjs"
+  },
+  "dependencies": {
+    "framer-motion": "^13.1.0",
+    "lucide-react": "^0.544.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.18.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.0",
+    "@types/node": "^22.20.1",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^6.0.0",
+    "prettier": "^3.9.6",
+    "tailwindcss": "^4.3.0",
+    "typescript": "~5.9.0",
+    "vite": "^8.2.0"
+  }
+}
