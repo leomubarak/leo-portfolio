@@ -30,11 +30,9 @@ export function Navbar() {
 
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
-    // Send focus back to the control that opened the menu.
     toggleRef.current?.focus();
   }, []);
 
-  // Escape closes the menu, as it does for any overlay.
   useEffect(() => {
     if (!menuOpen) return;
     const onKeyDown = (event: KeyboardEvent) => {
@@ -44,7 +42,6 @@ export function Navbar() {
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [menuOpen, closeMenu]);
 
-  // Anchors only resolve on the home page; from anywhere else, route home first.
   const resolveHref = (item: NavItem) =>
     item.href.startsWith('#') && pathname !== '/' ? `/${item.href}` : item.href;
 
@@ -54,17 +51,14 @@ export function Navbar() {
     <header
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300',
-        hasScrolled || menuOpen
-          ? 'border-b border-line bg-surface/85 backdrop-blur-md'
-          : 'border-b border-transparent bg-transparent',
+        hasScrolled || menuOpen ? 'border-b border-line bg-surface/85 backdrop-blur-md' : 'border-b border-transparent bg-transparent',
       )}
     >
       <Container className="flex h-16 items-center justify-between gap-4 md:h-20">
-        <Link to="/" className="rounded-md" aria-label="Leo — home">
+        <Link to="/" className="rounded-md" aria-label="Home">
           <Logo />
         </Link>
 
-        {/* Desktop navigation */}
         <nav aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center gap-1">
             {primaryNavItems.map((item) => (
@@ -77,11 +71,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <Button
-            href={pathname === '/' ? '#contact' : '/#contact'}
-            size="sm"
-            className="hidden sm:inline-flex"
-          >
+          <Button href={pathname === '/' ? '#contact' : '/#contact'} size="sm" className="hidden sm:inline-flex">
             Get in touch
           </Button>
 
@@ -99,7 +89,6 @@ export function Navbar() {
         </div>
       </Container>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -107,10 +96,7 @@ export function Navbar() {
             initial={reducedMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
             animate={reducedMotion ? { opacity: 1 } : { opacity: 1, height: 'auto' }}
             exit={reducedMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
-            transition={{
-              duration: reducedMotion ? 0 : duration.base,
-              ease: easing.soft,
-            }}
+            transition={{ duration: reducedMotion ? 0 : duration.base, ease: easing.soft }}
             className="overflow-hidden border-t border-line bg-surface lg:hidden"
           >
             <Container className="py-6">
@@ -118,24 +104,13 @@ export function Navbar() {
                 <ul className="grid gap-1">
                   {visibleNavItems.map((item) => (
                     <li key={item.href}>
-                      <NavLinkItem
-                        item={item}
-                        href={resolveHref(item)}
-                        active={isActive(item)}
-                        onNavigate={closeMenu}
-                        block
-                      />
+                      <NavLinkItem item={item} href={resolveHref(item)} active={isActive(item)} onNavigate={closeMenu} block />
                     </li>
                   ))}
                 </ul>
               </nav>
-
               <div className="mt-6 border-t border-line pt-6">
-                <Button
-                  href={pathname === '/' ? '#contact' : '/#contact'}
-                  fullWidth
-                  onClick={closeMenu}
-                >
+                <Button href={pathname === '/' ? '#contact' : '/#contact'} fullWidth onClick={closeMenu}>
                   Get in touch
                 </Button>
                 <SocialLinks className="mt-4" size="sm" />
@@ -148,15 +123,19 @@ export function Navbar() {
   );
 }
 
-interface NavLinkItemProps {
+function NavLinkItem({
+  item,
+  href,
+  active,
+  onNavigate,
+  block = false,
+}: {
   item: NavItem;
   href: string;
   active: boolean;
   onNavigate?: () => void;
   block?: boolean;
-}
-
-function NavLinkItem({ item, href, active, onNavigate, block = false }: NavLinkItemProps) {
+}) {
   const classes = cn(
     'relative rounded-full px-3.5 py-2 text-sm transition-colors duration-200',
     block ? 'block' : 'inline-block',
@@ -166,37 +145,20 @@ function NavLinkItem({ item, href, active, onNavigate, block = false }: NavLinkI
   const label = (
     <>
       {item.label}
-      {/* Underline marks the current section — position, not colour alone. */}
-      {active && (
-        <span
-          className="absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-accent"
-          aria-hidden="true"
-        />
-      )}
+      {active && <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-accent" aria-hidden="true" />}
     </>
   );
 
-  // Route links go through the router; anchors stay native so CSS smooth scroll applies.
   if (href.startsWith('/') && !href.includes('#')) {
     return (
-      <Link
-        to={href}
-        onClick={onNavigate}
-        className={classes}
-        aria-current={active ? 'page' : undefined}
-      >
+      <Link to={href} onClick={onNavigate} className={classes} aria-current={active ? 'page' : undefined}>
         {label}
       </Link>
     );
   }
 
   return (
-    <a
-      href={href}
-      onClick={onNavigate}
-      className={classes}
-      aria-current={active ? 'location' : undefined}
-    >
+    <a href={href} onClick={onNavigate} className={classes} aria-current={active ? 'location' : undefined}>
       {label}
     </a>
   );

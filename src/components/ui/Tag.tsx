@@ -12,12 +12,10 @@ const tones: Record<TagTone, string> = {
 interface TagProps {
   children: ReactNode;
   tone?: TagTone;
-  /** Small marker rendered before the label — used for skill levels. */
   dot?: boolean;
   className?: string;
 }
 
-/** Chip used for technologies, categories and skill levels. */
 export function Tag({ children, tone = 'neutral', dot = false, className }: TagProps) {
   return (
     <span
@@ -30,10 +28,7 @@ export function Tag({ children, tone = 'neutral', dot = false, className }: TagP
     >
       {dot && (
         <span
-          className={cn(
-            'size-1.5 rounded-full',
-            tone === 'accent' ? 'bg-accent' : 'bg-content-subtle',
-          )}
+          className={cn('size-1.5 rounded-full', tone === 'accent' ? 'bg-accent' : 'bg-content-subtle')}
           aria-hidden="true"
         />
       )}

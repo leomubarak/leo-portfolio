@@ -5,25 +5,13 @@ import { SocialIcon } from '@/components/brand/SocialIcon';
 interface SocialLinksProps {
   className?: string;
   size?: 'sm' | 'md';
-  /** Shows the platform name next to the icon (used in the mobile menu). */
   withLabels?: boolean;
 }
 
-/**
- * Renders only the links that have a URL. Anything still empty in
- * `src/data/socialLinks.ts` is skipped, so the site never shows a dead button.
- */
 export function SocialLinks({ className, size = 'md', withLabels = false }: SocialLinksProps) {
   if (activeSocialLinks.length === 0) {
-    // Visible during development only, as a reminder to fill the data file in.
     return import.meta.env.DEV ? (
-      <p
-        className={cn(
-          'rounded-full border border-dashed border-line-strong px-3 py-1.5',
-          'font-mono text-[11px] text-content-subtle',
-          className,
-        )}
-      >
+      <p className={cn('rounded-full border border-dashed border-line-strong px-3 py-1.5', 'font-mono text-[11px] text-content-subtle', className)}>
         Add your profile URLs in src/data/socialLinks.ts
       </p>
     ) : null;

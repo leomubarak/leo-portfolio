@@ -4,11 +4,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { cn } from '@/lib/cn';
 
-interface ThemeToggleProps {
-  className?: string;
-}
-
-export function ThemeToggle({ className }: ThemeToggleProps) {
+export function ThemeToggle({ className }: { className?: string }) {
   const { theme, toggleTheme } = useTheme();
   const reducedMotion = usePrefersReducedMotion();
   const isDark = theme === 'dark';
@@ -17,7 +13,6 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
     <button
       type="button"
       onClick={toggleTheme}
-      // The label states what the button does, not what the theme currently is.
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
       title={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
       className={cn(
@@ -33,10 +28,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
           initial={reducedMotion ? false : { opacity: 0, rotate: -35, scale: 0.7 }}
           animate={{ opacity: 1, rotate: 0, scale: 1 }}
           exit={reducedMotion ? { opacity: 0 } : { opacity: 0, rotate: 35, scale: 0.7 }}
-          transition={{
-            duration: reducedMotion ? 0 : 0.18,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+          transition={{ duration: reducedMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
           className="flex items-center justify-center"
         >
           {isDark ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}

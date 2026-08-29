@@ -13,20 +13,12 @@ export function BackToTop() {
       {visible && (
         <motion.button
           type="button"
-          onClick={() =>
-            window.scrollTo({
-              top: 0,
-              behavior: reducedMotion ? 'auto' : 'smooth',
-            })
-          }
+          onClick={() => window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' })}
           aria-label="Back to top"
           initial={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.9 }}
-          transition={{
-            duration: reducedMotion ? 0 : duration.fast,
-            ease: easing.soft,
-          }}
+          transition={{ duration: reducedMotion ? 0 : duration.fast, ease: easing.soft }}
           className="fixed right-5 bottom-5 z-40 inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface-raised text-content-muted shadow-lifted transition-colors hover:border-line-strong hover:text-content md:right-8 md:bottom-8"
         >
           <ArrowUp size={18} aria-hidden="true" />

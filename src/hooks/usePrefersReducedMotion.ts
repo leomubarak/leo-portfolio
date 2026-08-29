@@ -2,10 +2,6 @@ import { useEffect, useState } from 'react';
 
 const QUERY = '(prefers-reduced-motion: reduce)';
 
-/**
- * Reads the OS "reduce motion" setting and keeps up with changes.
- * Use it to skip Framer Motion animations rather than shortening them.
- */
 export function usePrefersReducedMotion(): boolean {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(() => {
     if (typeof window === 'undefined' || !window.matchMedia) return false;

@@ -2,59 +2,53 @@ export interface JourneyMilestone {
   id: string;
   title: string;
   description: string;
-  /** Optional period label. Left undefined until you confirm real dates. */
   period?: string;
   tags?: string[];
-  /** The stage you are in now. */
   current?: boolean;
 }
 
-/**
- * A learning story, in order. No employment, no clients, no dates that have
- * not been confirmed — only what has actually happened so far.
- */
 export const journey: JourneyMilestone[] = [
   {
     id: 'academic',
     title: 'Started Information Technology Education',
     description:
-      'Began the programme at USTED-Kumasi and found that the technology side pulled hardest. Programming turned from a course requirement into the thing I wanted to spend time on.',
+      'Began the programme at USTED-Kumasi. The technology side pulled hardest, and programming turned from a course requirement into the thing I wanted to spend time on.',
     tags: ['USTED-Kumasi', 'IT Education'],
   },
   {
     id: 'programming',
     title: 'Learning to program',
     description:
-      'Worked through programming languages one at a time and started writing small applications instead of only exercises — the point where reading code became writing it.',
-    tags: ['Python', 'Java', 'JavaScript'],
+      'Worked through programming fundamentals and started writing small applications instead of only exercises, the point where reading code became writing it.',
+    tags: ['JavaScript', 'HTML', 'CSS', 'PHP'],
   },
   {
     id: 'web',
     title: 'Building for the web',
     description:
-      'Moved on to websites and management systems: pages that talk to a database, forms that validate, records that persist. The first time a project had users other than me.',
+      'Moved on to real websites and database-driven pages: forms that validate, records that persist, layouts that work on a phone as well as a laptop.',
     tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
   },
   {
-    id: 'applications',
-    title: 'Desktop and mobile applications',
+    id: 'frameworks',
+    title: 'Working with React',
     description:
-      'Built desktop software with Java and Java Swing, then crossed over to mobile with React Native and Expo — two very different ways of thinking about the same problem.',
-    tags: ['Java', 'Java Swing', 'React', 'React Native', 'Expo'],
+      'Picked up React and modern frontend tooling, and started building interfaces as components instead of one long page in a different way of thinking about the same problem.',
+    tags: ['React', 'Tailwind CSS', 'Vite'],
   },
   {
-    id: 'edtech',
-    title: 'Teaching what I learn',
+    id: 'projects',
+    title: 'Building real projects',
     description:
-      'Started making programming tutorials, notes and catch-up materials for other students. Explaining a concept is the fastest way to find out whether I actually understand it.',
-    tags: ['Tutorials', 'Notes', 'Catch-up classes'],
+      'Put it together into actual projects: CampusStay for student accommodation, Chichi\u2019s Kitchen as a food-focused web project, and this portfolio to bring the work together in one place.',
+    tags: ['CampusStay', "Chichi's Kitchen", 'Portfolio'],
   },
   {
     id: 'current',
     title: 'Where I am now',
     description:
-      'Working on larger projects and deepening the parts I know least: full-stack development, mobile, UI/UX, database design, and educational technology.',
-    tags: ['Full-stack', 'Mobile', 'UI/UX', 'Databases', 'EdTech'],
+      'Level 400, focused on deepening my web development skills in React, responsive design, and building applications that are genuinely useful rather than just functional.',
+    tags: ['Web Development', 'React', 'UI/UX'],
     current: true,
   },
 ];

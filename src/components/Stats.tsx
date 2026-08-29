@@ -3,12 +3,11 @@ import { useCountUp } from '@/hooks/useCountUp';
 import { stats } from '@/data/stats';
 import type { Stat } from '@/data/stats';
 
-/** Narrow band between sections. Counts come from the site's own data. */
 export function Stats() {
   return (
     <section aria-label="Portfolio at a glance" className="border-y border-line bg-surface-sunken">
       <Container className="py-12 md:py-16">
-        <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid gap-8 sm:grid-cols-3">
           {stats.map((stat, index) => (
             <li key={stat.label}>
               <Reveal delay={index * 0.05}>
@@ -24,7 +23,6 @@ export function Stats() {
 
 function StatItem({ stat }: { stat: Stat }) {
   const { ref, value } = useCountUp(stat.value);
-
   return (
     <div>
       <p className="font-display text-display-md font-semibold text-accent">

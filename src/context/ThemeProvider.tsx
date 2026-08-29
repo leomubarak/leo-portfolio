@@ -10,13 +10,7 @@ import {
 } from '@/lib/theme';
 import { ThemeContext } from './theme-context';
 
-interface ThemeProviderProps {
-  children: ReactNode;
-}
-
-export function ThemeProvider({ children }: ThemeProviderProps) {
-  // Read synchronously so the first render already matches the DOM class
-  // set by the inline script in index.html (no flash, no mismatch).
+export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => resolveInitialTheme());
   const [isSystemTheme, setIsSystemTheme] = useState<boolean>(() => getStoredTheme() === null);
 
@@ -24,7 +18,6 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     applyTheme(theme);
   }, [theme]);
 
-  // Follow the OS only until the user picks a side.
   useEffect(() => {
     if (!isSystemTheme) return;
     return subscribeToSystemTheme(setThemeState);

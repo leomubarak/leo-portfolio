@@ -8,7 +8,6 @@ const tones: Record<CardTone, string> = {
   raised: 'border border-line bg-surface-raised shadow-raised',
   sunken: 'border border-line bg-surface-sunken',
   outline: 'border border-line bg-transparent',
-  // Reserved for "nothing here yet" states, so an empty slot reads as intentional.
   dashed: 'border border-dashed border-line-strong bg-transparent',
 };
 
@@ -23,7 +22,6 @@ interface CardProps {
   children: ReactNode;
   tone?: CardTone;
   padding?: CardPadding;
-  /** Adds the hover lift used by project and article cards. */
   interactive?: boolean;
   className?: string;
   as?: ElementType;

@@ -1,4 +1,3 @@
-/** First thing in the tab order: jumps keyboard users past the navigation. */
 export function SkipLink() {
   return (
     <a

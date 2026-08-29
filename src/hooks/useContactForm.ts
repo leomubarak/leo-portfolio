@@ -3,17 +3,8 @@ import { validateField, validateForm } from '@/lib/validation';
 import type { ContactFormErrors, ContactFormValues } from '@/lib/validation';
 
 export type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
-
-const EMPTY_VALUES: ContactFormValues = {
-  name: '',
-  email: '',
-  subject: '',
-  message: '',
-};
-
-/** Set VITE_CONTACT_ENDPOINT in .env to connect a provider (see README). */
+const EMPTY_VALUES: ContactFormValues = { name: '', email: '', subject: '', message: '' };
 const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT ?? '';
-
 export const isContactEndpointConfigured = ENDPOINT.trim().length > 0;
 
 export function useContactForm() {
@@ -22,20 +13,13 @@ export function useContactForm() {
   const [touched, setTouched] = useState<Partial<Record<keyof ContactFormValues, boolean>>>({});
   const [status, setStatus] = useState<SubmitStatus>('idle');
   const [statusMessage, setStatusMessage] = useState('');
-
-  /** Simple bot trap: a hidden field humans never see, let alone fill in. */
   const honeypot = useRef('');
 
   const setValue = useCallback(
     (field: keyof ContactFormValues, value: string) => {
       setValues((current) => ({ ...current, [field]: value }));
-      // Only re-validate live once the field has been left at least once,
-      // so nobody is told their email is wrong while still typing it.
       if (touched[field]) {
-        setErrors((current) => ({
-          ...current,
-          [field]: validateField(field, value),
-        }));
+        setErrors((current) => ({ ...current, [field]: validateField(field, value) }));
       }
     },
     [touched],
@@ -44,10 +28,7 @@ export function useContactForm() {
   const handleBlur = useCallback(
     (field: keyof ContactFormValues) => {
       setTouched((current) => ({ ...current, [field]: true }));
-      setErrors((current) => ({
-        ...current,
-        [field]: validateField(field, values[field]),
-      }));
+      setErrors((current) => ({ ...current, [field]: validateField(field, values[field]) }));
     },
     [values],
   );
@@ -67,10 +48,9 @@ export function useContactForm() {
       return firstInvalid;
     }
 
-    // Pretend success for bots rather than telling them the trap worked.
     if (honeypot.current.trim().length > 0) {
       setStatus('success');
-      setStatusMessage('Thanks — your message has been sent.');
+      setStatusMessage('Thanks, your message has been sent.');
       setValues(EMPTY_VALUES);
       return null;
     }
@@ -78,7 +58,7 @@ export function useContactForm() {
     if (!isContactEndpointConfigured) {
       setStatus('error');
       setStatusMessage(
-        'The form is not connected to an email service yet, so this message would not reach anyone. Please use one of the direct contact options instead.',
+        'The form is not connected to an email service yet, so this message would not reach anyone. Please email leomubarak11@gmail.com directly instead.',
       );
       return null;
     }
@@ -89,26 +69,20 @@ export function useContactForm() {
     try {
       const response = await fetch(ENDPOINT, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(values),
       });
-
       if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
-
       setStatus('success');
-      setStatusMessage('Thanks — your message has been sent. I will reply as soon as I can.');
+      setStatusMessage('Thanks, your message has been sent. I will reply as soon as I can.');
       setValues(EMPTY_VALUES);
       setTouched({});
     } catch {
       setStatus('error');
       setStatusMessage(
-        'Something went wrong sending that. Please try again, or reach me directly using the options listed.',
+        'Something went wrong sending that. Please try again, or email leomubarak11@gmail.com directly.',
       );
     }
-
     return null;
   }, [values]);
 

@@ -6,9 +6,6 @@ import { Journey } from '@/components/Journey';
 import { Education } from '@/components/Education';
 import { Skills } from '@/components/Skills';
 import { Projects } from '@/components/Projects';
-import { Teaching } from '@/components/Teaching';
-import { Content } from '@/components/Content';
-import { Services } from '@/components/Services';
 import { Contact } from '@/components/Contact';
 import { personSchema, websiteSchema } from '@/lib/structuredData';
 
@@ -23,9 +20,6 @@ export function Home() {
       <Projects />
       <Journey />
       <Education />
-      <Teaching />
-      <Content />
-      <Services />
       <Contact />
     </main>
   );

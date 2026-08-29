@@ -1,74 +1,71 @@
 /**
  * Single source of truth for identity and copy.
  * Edit this file to change wording on the site — no component edits needed.
- * Anything not yet confirmed is left as an empty string and hidden by the UI.
  */
 
 export const siteConfig = {
   /* --- Identity --------------------------------------------------------- */
-  name: 'Leo',
-  initials: 'L',
-  role: 'Information Technology Education Student & Developer',
+  fullName: 'Mubarak Mohammed Ali',
+  /** Short/casual name, used in the navbar wordmark and informal copy. */
+  shortName: 'Leo',
+  /** How the two are combined for headings that should show both. */
+  displayName: 'Mubarak Mohammed Ali | Leo',
+  initials: 'MMA',
+  role: 'Full-StackWeb Developer & Information Technology Education Student',
   shortBio:
-    'I build practical digital solutions while exploring the intersection of technology, software development, and education.',
-  tagline: 'Learn. Build. Teach. Create.',
+    'A Level 400 Information Technology Education student who builds practical websites and web applications.',
+  tagline: 'Learn. Build. Create.',
   location: 'Kumasi, Ghana',
-  /** Leave empty until the real address is confirmed. */
   email: 'leomubarak11@gmail.com',
   /** Digits only, international format, no "+" — e.g. '233200000000'. Used for wa.me links. */
-  whatsappNumber: '233593660818',
+  whatsappNumber: '',
 
   /* --- Hero ------------------------------------------------------------- */
   hero: {
-    eyebrow: "Hello, I'm Mubarak Mohammed  Ali, but you can call me Leo.",
-    /* The headline renders as: headline + accented headlineAccent + headlineEnd. */
-    headline: 'I build websites, learn and',
-    headlineAccent: 'teach',
-    headlineEnd: 'with technology.',
+    eyebrow: 'Mubarak Mohammed Ali · Leo',
+    headline: 'I\u2019m a',
+    headlineAccent: 'Full-Stack Web Developer',
+    headlineEnd: '& Final-Year IT Student',
     subline:
-      "I'm an Information Technology Education student and developer passionate about software development, educational technology, and helping students turn complex programming concepts into practical skills.",
+      "I'm a Level 400 Information Technology Education student, I build practical, user-focused websites and web applications that turn ideas into real-world digital solutions.",
     primaryCta: { label: 'View my projects', href: '#projects' },
-    secondaryCta: { label: 'About me', href: '#about' },
+    secondaryCta: { label: 'Get in touch', href: '#contact' },
     /** Drop your CV at `public/leo-cv.pdf`, then set this to '/leo-cv.pdf'. */
     resumeUrl: '',
   },
 
-  /* --- Images ----------------------------------------------------------- */
+  /* --- Images ------------------------------------------------------------
+     Both the hero profile picture and the About photo reuse the same asset,
+     per the request to use the existing "background" photo as the profile
+     picture rather than introducing a new image. */
   images: {
-    portrait: '/images/leo-portrait.png',
+    portrait: '/images/leo-portrait-alt.jpeg',
     portraitAlt: '/images/leo-portrait-alt.jpeg',
-    /** Open Graph card, 1200x630. Add the file before launch. */
     ogImage: '/og-image.png',
   },
 
-  /* --- SEO (wired up in Phase 11) --------------------------------------- */
+  /* --- SEO ---------------------------------------------------------------- */
   seo: {
-    title: 'Mubarak Mohammed Ali | Information Technology Education Student & Web Developer',
+    title: 'Mubarak Mohammed Ali Portfolio | Full-Stack Web Developer',
     description:
-      'Personal portfolio of Mubarak Mohammed Ali, an Information Technology Education student and Web Developer passionate about software development, educational technology, programming, and building practical digital solutions.',
-    /** Set after the first Vercel deploy, or read from VITE_SITE_URL. */
+      'Mubarak Mohammed Ali | Full-Stack Web Developer and Level 400 Information Technology Education Student.',
     url: import.meta.env.VITE_SITE_URL ?? '',
     keywords: [
       'Mubarak Mohammed Ali',
+      'Leo',
+      'Full-Stack Web Developer',
       'Information Technology Education',
-      'student developer',
+      'React',
       'web development',
-      'React Native',
-      'educational technology',
       'Kumasi',
       'Ghana',
     ],
   },
 
-  /* --- Footer ----------------------------------------------------------- */
+  /* --- Footer -------------------------------------------------------------- */
   footer: {
-    note: 'Built with React and a real interest in how technology gets taught.',
+    note: 'Built with React, focused on the web.',
     startYear: 2026,
-    /**
-     * Legal pages. Empty by default: a portfolio that collects nothing beyond
-     * a contact form rarely needs them, and linking to pages that do not exist
-     * is worse than leaving them out. Add { label, href } once you write one.
-     */
     legalLinks: [] as { label: string; href: string }[],
   },
 } as const;

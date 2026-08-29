@@ -1,12 +1,10 @@
 import { projects } from './projects';
 import { skillCategories } from './skills';
-import { teaching } from './teaching';
 
 /**
- * Every figure here is counted from the site's own data at build time.
- * Nothing is typed in by hand, so a number can never drift away from what the
- * portfolio actually shows — and there is no way to inflate one by accident.
- * If you cannot count it from real data, it does not belong in this file.
+ * Every figure here is counted from the site's own data at build time —
+ * nothing is typed in by hand. Trimmed to three stats since the fourth
+ * (catch-up topics) no longer exists after removing the teaching section.
  */
 const uniqueTechnologies = new Set(
   projects.flatMap((project) => project.technologies.map((tech) => tech.toLowerCase())),
@@ -14,7 +12,6 @@ const uniqueTechnologies = new Set(
 
 export interface Stat {
   value: number;
-  /** Rendered after the number, e.g. '+'. Leave empty for exact counts. */
   suffix?: string;
   label: string;
   description: string;
@@ -34,11 +31,6 @@ export const stats: Stat[] = [
   {
     value: skillCategories.length,
     label: 'Skill areas',
-    description: 'From programming languages through to database design.',
-  },
-  {
-    value: teaching.catchUp.topics.length,
-    label: 'Catch-up topics',
-    description: 'Subjects I can sit down and work through with someone.',
+    description: 'From core programming through to tools and UI/UX.',
   },
 ];

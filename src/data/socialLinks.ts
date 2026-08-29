@@ -57,5 +57,4 @@ export const socialLinks: SocialLink[] = [
   },
 ];
 
-/** Only the links you have actually filled in. */
 export const activeSocialLinks = socialLinks.filter((link) => link.href.trim().length > 0);

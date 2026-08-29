@@ -11,7 +11,6 @@ import {
 import type { LucideIcon } from 'lucide-react';
 import type { SocialPlatform } from '@/types';
 
-/** WhatsApp and TikTok have no brand icons in Lucide; the closest plain icons are used instead. */
 const icons: Record<SocialPlatform, LucideIcon> = {
   github: Github,
   linkedin: Linkedin,

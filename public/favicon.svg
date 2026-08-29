@@ -1,11 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Leo">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mubarak Mohammed Ali">
   <rect width="64" height="64" rx="16" fill="#0E1311" />
-  <path
-    d="M20 16v24h13"
-    fill="none"
-    stroke="#FAFBF9"
-    stroke-width="6"
-    stroke-linecap="square"
-  />
+  <path d="M20 16v24h13" fill="none" stroke="#FAFBF9" stroke-width="6" stroke-linecap="square" />
   <path d="M36 46h12" fill="none" stroke="#3FA97A" stroke-width="6" stroke-linecap="round" />
 </svg>

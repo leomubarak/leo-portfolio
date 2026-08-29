@@ -3,13 +3,7 @@ import { Link } from 'react-router-dom';
 import { Card, Tag } from '@/components/ui';
 import type { Project } from '@/data/projects';
 
-interface ProjectCardProps {
-  project: Project;
-  /** Number of technology chips before collapsing into "+n". */
-  maxTechnologies?: number;
-}
-
-export function ProjectCard({ project, maxTechnologies = 4 }: ProjectCardProps) {
+export function ProjectCard({ project, maxTechnologies = 4 }: { project: Project; maxTechnologies?: number }) {
   const shown = project.technologies.slice(0, maxTechnologies);
   const hidden = project.technologies.length - shown.length;
 
@@ -25,42 +19,23 @@ export function ProjectCard({ project, maxTechnologies = 4 }: ProjectCardProps) 
         />
         {project.status && (
           <span className="absolute top-4 left-4">
-            <Tag tone="accent" dot>
-              {project.status}
-            </Tag>
+            <Tag tone="accent" dot>{project.status}</Tag>
           </span>
         )}
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <p className="font-mono text-[11px] tracking-wide text-content-subtle">
-          {project.category}
-        </p>
-
+        <p className="font-mono text-[11px] tracking-wide text-content-subtle">{project.category}</p>
         <h3 className="mt-3 font-display text-xl font-semibold text-content">
-          {/* Stretched link: the whole card is clickable, but only one link is
-              announced, and the buttons below still work. */}
-          <Link
-            to={`/projects/${project.slug}`}
-            className="after:absolute after:inset-0 after:content-['']"
-          >
+          <Link to={`/projects/${project.slug}`} className="after:absolute after:inset-0 after:content-['']">
             {project.name}
           </Link>
         </h3>
-
         <p className="mt-3 text-sm leading-relaxed text-content-muted">{project.summary}</p>
 
         <ul className="mt-5 flex flex-wrap gap-2">
-          {shown.map((tech) => (
-            <li key={tech}>
-              <Tag>{tech}</Tag>
-            </li>
-          ))}
-          {hidden > 0 && (
-            <li>
-              <Tag tone="outline">+{hidden}</Tag>
-            </li>
-          )}
+          {shown.map((tech) => (<li key={tech}><Tag>{tech}</Tag></li>))}
+          {hidden > 0 && <li><Tag tone="outline">+{hidden}</Tag></li>}
         </ul>
 
         <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-line pt-5">
@@ -68,29 +43,14 @@ export function ProjectCard({ project, maxTechnologies = 4 }: ProjectCardProps) 
             Case study
             <ArrowUpRight size={16} aria-hidden="true" />
           </span>
-
-          {/* Only rendered once a real URL exists in projects.ts. */}
           {project.links.demo && (
-            <a
-              href={project.links.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative z-10 inline-flex items-center gap-1.5 text-sm text-content-muted transition-colors hover:text-content"
-              aria-label={`${project.name} live demo (opens in a new tab)`}
-            >
+            <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="relative z-10 inline-flex items-center gap-1.5 text-sm text-content-muted transition-colors hover:text-content" aria-label={`${project.name} live demo (opens in a new tab)`}>
               <ExternalLink size={15} aria-hidden="true" />
               Live demo
             </a>
           )}
-
           {project.links.github && (
-            <a
-              href={project.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative z-10 inline-flex items-center gap-1.5 text-sm text-content-muted transition-colors hover:text-content"
-              aria-label={`${project.name} source code on GitHub (opens in a new tab)`}
-            >
+            <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="relative z-10 inline-flex items-center gap-1.5 text-sm text-content-muted transition-colors hover:text-content" aria-label={`${project.name} source code on GitHub (opens in a new tab)`}>
               <Github size={15} aria-hidden="true" />
               Code
             </a>

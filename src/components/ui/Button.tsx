@@ -19,7 +19,6 @@ const variants: Record<ButtonVariant, string> = {
   secondary:
     'border border-line-strong bg-surface-raised text-content hover:border-content-subtle hover:bg-surface-sunken',
   ghost: 'text-content-muted hover:bg-surface-sunken hover:text-content',
-  // Underline, not colour alone, so the affordance survives greyscale.
   link: 'text-accent underline decoration-1 underline-offset-4 hover:decoration-2 rounded-none px-0',
 };
 
@@ -38,23 +37,15 @@ interface StyleProps {
 }
 
 type NativeButtonProps = StyleProps &
-  Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof StyleProps> & {
-    href?: never;
-    to?: never;
-  };
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof StyleProps> & { href?: never; to?: never };
 
 type AnchorProps = StyleProps &
   Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof StyleProps | 'href'> & {
-    /** External URL or in-page anchor. Renders an <a>. */
     href: string;
     to?: never;
   };
 
-type RouterLinkProps = StyleProps & {
-  /** Internal route. Renders a React Router <Link>. */
-  to: string;
-  href?: never;
-};
+type RouterLinkProps = StyleProps & { to: string; href?: never };
 
 export type ButtonProps = NativeButtonProps | AnchorProps | RouterLinkProps;
 
@@ -68,11 +59,6 @@ function buttonClasses({ variant = 'primary', size = 'md', fullWidth, className 
   );
 }
 
-/**
- * The only button in the project. If a control needs a look that is not here,
- * add a variant instead of styling one off inside a section component.
- * Icons are decoration — every button keeps a text label.
- */
 export function Button(props: ButtonProps) {
   const classes = buttonClasses(props);
 
