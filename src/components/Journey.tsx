@@ -9,7 +9,7 @@ export function Journey() {
         id="journey"
         eyebrow="Journey"
         title="How I got here"
-        description="A developer's progression, in the order it happened and it\u2019s still going."
+        description="A developer's progression, in the order it happened and it's still going."
       />
       <ol className="relative mt-14 space-y-8 sm:space-y-10">
         <span
