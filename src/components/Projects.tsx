@@ -13,7 +13,7 @@ export function Projects() {
         id="projects"
         eyebrow="Projects"
         title="Things I have built"
-        description="Three projects, each with the story behind it — what problem it solves, what it taught me, and what I would do differently next time."
+        description="Three projects, each with the story behind it, what problem it solves, what it taught me, and what I would do differently next time."
       />
       <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, index) => (

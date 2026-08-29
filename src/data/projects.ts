@@ -66,7 +66,7 @@ export const projects: Project[] = [
     featured: true,
     caseStudy: {
       overview:
-        'CampusStay brings student accommodation into one place: what is available near campus, what each room looks like, and what it costs — without depending on notice boards and word of mouth.',
+        'CampusStay brings student accommodation into one place: what is available near campus, what each room looks like, and what it costs, without depending on notice boards and word of mouth.',
       problem:
         'Finding a room near campus usually means asking around and relying on posters. Information is scattered, often out of date, and difficult to compare before visiting in person.',
       solution:
@@ -99,7 +99,7 @@ export const projects: Project[] = [
     technologies: ['HTML', 'CSS', 'JavaScript'],
     features: ['Menu presentation', 'Responsive layout', 'Clean, simple customer experience'],
     cover: '/projects/chichis-kitchen/screenshot-1.jpg',
-    coverAlt: "Chichi's Kitchen homepage — hero section with featured dishes",
+    coverAlt: "Chichi's Kitchen homepage, hero section with featured dishes",
     screenshots: [
       {
         src: '/projects/chichis-kitchen/screenshot-1.jpg',

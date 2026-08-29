@@ -16,7 +16,7 @@ export const education: EducationEntry[] = [
     institution: 'USTED-Kumasi',
     status: 'Level 400 · in progress',
     summary:
-      'A programme that pairs information technology with the practice of teaching it. My own focus within it has shifted toward web development — building real websites and applications alongside the coursework.',
+      'A programme that pairs information technology with the practice of teaching it. My own focus within it has shifted toward web development, building real websites and applications alongside the coursework.',
     focusAreas: [
       'Information technology',
       'Programming',

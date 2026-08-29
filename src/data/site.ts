@@ -64,7 +64,7 @@ export const siteConfig = {
 
   /* --- Footer -------------------------------------------------------------- */
   footer: {
-    note: 'Built with React, focused on the web.',
+    note: 'Built with React, focused on the web development.',
     startYear: 2026,
     legalLinks: [] as { label: string; href: string }[],
   },
