@@ -3,9 +3,17 @@ import { validateField, validateForm } from '@/lib/validation';
 import type { ContactFormErrors, ContactFormValues } from '@/lib/validation';
 
 export type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
-const EMPTY_VALUES: ContactFormValues = { name: '', email: '', subject: '', message: '' };
-const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT ?? '';
-export const isContactEndpointConfigured = ENDPOINT.trim().length > 0;
+
+const EMPTY_VALUES: ContactFormValues = {
+  name: '',
+  email: '',
+  subject: '',
+  message: '',
+};
+
+const ENDPOINT = '/api/contact';
+
+export const isContactEndpointConfigured = true;
 
 export function useContactForm() {
   const [values, setValues] = useState<ContactFormValues>(EMPTY_VALUES);
@@ -18,8 +26,12 @@ export function useContactForm() {
   const setValue = useCallback(
     (field: keyof ContactFormValues, value: string) => {
       setValues((current) => ({ ...current, [field]: value }));
+
       if (touched[field]) {
-        setErrors((current) => ({ ...current, [field]: validateField(field, value) }));
+        setErrors((current) => ({
+          ...current,
+          [field]: validateField(field, value),
+        }));
       }
     },
     [touched],
@@ -28,7 +40,11 @@ export function useContactForm() {
   const handleBlur = useCallback(
     (field: keyof ContactFormValues) => {
       setTouched((current) => ({ ...current, [field]: true }));
-      setErrors((current) => ({ ...current, [field]: validateField(field, values[field]) }));
+
+      setErrors((current) => ({
+        ...current,
+        [field]: validateField(field, values[field]),
+      }));
     },
     [values],
   );
@@ -39,27 +55,28 @@ export function useContactForm() {
 
   const submit = useCallback(async (): Promise<keyof ContactFormValues | null> => {
     const nextErrors = validateForm(values);
+
     setErrors(nextErrors);
-    setTouched({ name: true, email: true, subject: true, message: true });
+
+    setTouched({
+      name: true,
+      email: true,
+      subject: true,
+      message: true,
+    });
 
     const firstInvalid = (Object.keys(nextErrors) as (keyof ContactFormValues)[])[0];
+
     if (firstInvalid) {
       setStatus('idle');
       return firstInvalid;
     }
 
+    // Honeypot spam protection
     if (honeypot.current.trim().length > 0) {
       setStatus('success');
       setStatusMessage('Thanks, your message has been sent.');
       setValues(EMPTY_VALUES);
-      return null;
-    }
-
-    if (!isContactEndpointConfigured) {
-      setStatus('error');
-      setStatusMessage(
-        'The form is not connected to an email service yet, so this message would not reach anyone. Please email leomubarak11@gmail.com directly instead.',
-      );
       return null;
     }
 
@@ -69,20 +86,33 @@ export function useContactForm() {
     try {
       const response = await fetch(ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
         body: JSON.stringify(values),
       });
-      if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
+
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(result?.error || `Request failed with status ${response.status}`);
+      }
+
       setStatus('success');
       setStatusMessage('Thanks, your message has been sent. I will reply as soon as I can.');
+
       setValues(EMPTY_VALUES);
       setTouched({});
-    } catch {
+    } catch (error) {
+      console.error('Contact form error:', error);
+
       setStatus('error');
       setStatusMessage(
         'Something went wrong sending that. Please try again, or email leomubarak11@gmail.com directly.',
       );
     }
+
     return null;
   }, [values]);
 
